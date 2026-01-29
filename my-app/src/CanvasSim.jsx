@@ -255,32 +255,210 @@ export default function CanvasSim({ flowSpeed, numParticles }) {
 
   return (
     <div className="relative">
-      {/* Sidebar / buttons */}
-      <div className="absolute top-4 left-4 z-10 space-y-2 bg-white p-2 rounded shadow">
-        <div className="space-x-2">
-          {adding && (
-            <button onClick={() => setSelectedShape("circle")}>Circle</button>
-          )}
-          {adding && (
-            <button onClick={() => setSelectedShape("square")}>Square</button>
-          )}
-          {adding && (
-            <button onClick={() => setSelectedShape("triangle")}>
-              Triangle
-            </button>
-          )}
-        </div>
+      {/* Shape controls */}
+      <div
+        style={{
+          position: "absolute",
+          top: "24px",
+          left: "24px",
+          zIndex: 10,
+          display: "flex",
+          flexDirection: "column",
+          gap: "12px",
+        }}
+      >
+        {/* Shape selector (when adding) */}
+        {adding && (
+          <div
+            style={{
+              padding: "16px",
+              background: "rgba(15, 20, 32, 0.75)",
+              backdropFilter: "blur(20px)",
+              border: "1px solid rgba(120, 180, 255, 0.15)",
+              borderRadius: "12px",
+              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",
+              animation: "fadeIn 0.3s ease-out",
+            }}
+          >
+            <p
+              style={{
+                margin: "0 0 12px 0",
+                fontSize: "13px",
+                fontFamily: "JetBrains Mono, monospace",
+                color: "rgba(255, 255, 255, 0.65)",
+                letterSpacing: "0.02em",
+              }}
+            >
+              SELECT SHAPE
+            </p>
+            <div style={{ display: "flex", gap: "8px" }}>
+              <button
+                onClick={() => setSelectedShape("circle")}
+                style={{
+                  padding: "10px 16px",
+                  background:
+                    selectedShape === "circle"
+                      ? "rgba(120, 180, 255, 0.25)"
+                      : "rgba(120, 180, 255, 0.1)",
+                  border:
+                    selectedShape === "circle"
+                      ? "1px solid rgba(120, 180, 255, 0.4)"
+                      : "1px solid rgba(120, 180, 255, 0.15)",
+                  borderRadius: "8px",
+                  color: "rgba(255, 255, 255, 0.9)",
+                  fontFamily: "Crimson Pro, serif",
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = "rgba(120, 180, 255, 0.2)";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background =
+                    selectedShape === "circle"
+                      ? "rgba(120, 180, 255, 0.25)"
+                      : "rgba(120, 180, 255, 0.1)";
+                }}
+              >
+                Circle
+              </button>
+              <button
+                onClick={() => setSelectedShape("square")}
+                style={{
+                  padding: "10px 16px",
+                  background:
+                    selectedShape === "square"
+                      ? "rgba(120, 180, 255, 0.25)"
+                      : "rgba(120, 180, 255, 0.1)",
+                  border:
+                    selectedShape === "square"
+                      ? "1px solid rgba(120, 180, 255, 0.4)"
+                      : "1px solid rgba(120, 180, 255, 0.15)",
+                  borderRadius: "8px",
+                  color: "rgba(255, 255, 255, 0.9)",
+                  fontFamily: "Crimson Pro, serif",
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = "rgba(120, 180, 255, 0.2)";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background =
+                    selectedShape === "square"
+                      ? "rgba(120, 180, 255, 0.25)"
+                      : "rgba(120, 180, 255, 0.1)";
+                }}
+              >
+                Square
+              </button>
+              <button
+                onClick={() => setSelectedShape("triangle")}
+                style={{
+                  padding: "10px 16px",
+                  background:
+                    selectedShape === "triangle"
+                      ? "rgba(120, 180, 255, 0.25)"
+                      : "rgba(120, 180, 255, 0.1)",
+                  border:
+                    selectedShape === "triangle"
+                      ? "1px solid rgba(120, 180, 255, 0.4)"
+                      : "1px solid rgba(120, 180, 255, 0.15)",
+                  borderRadius: "8px",
+                  color: "rgba(255, 255, 255, 0.9)",
+                  fontFamily: "Crimson Pro, serif",
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = "rgba(120, 180, 255, 0.2)";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background =
+                    selectedShape === "triangle"
+                      ? "rgba(120, 180, 255, 0.25)"
+                      : "rgba(120, 180, 255, 0.1)";
+                }}
+              >
+                Triangle
+              </button>
+            </div>
+          </div>
+        )}
 
-        <div className="space-x-2 mt-2">
+        {/* Action buttons */}
+        <div
+          style={{
+            padding: "16px",
+            background: "rgba(15, 20, 32, 0.75)",
+            backdropFilter: "blur(20px)",
+            border: "1px solid rgba(120, 180, 255, 0.15)",
+            borderRadius: "12px",
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
+            animation: "fadeInUp 0.6s ease-out",
+            animationDelay: "0.1s",
+            animationFillMode: "backwards",
+          }}
+        >
           <button
             onClick={() => {
               setAdding(true);
               canvasRef.current.style.cursor = "crosshair";
             }}
+            style={{
+              padding: "12px 20px",
+              background: "rgba(120, 180, 255, 0.15)",
+              border: "1px solid rgba(120, 180, 255, 0.3)",
+              borderRadius: "8px",
+              color: "#78b4ff",
+              fontFamily: "Crimson Pro, serif",
+              fontSize: "15px",
+              fontWeight: "500",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = "rgba(120, 180, 255, 0.25)";
+              e.target.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = "rgba(120, 180, 255, 0.15)";
+              e.target.style.transform = "translateY(0)";
+            }}
           >
-            Add Shape
+            + Add Shape
           </button>
-          <button onClick={() => removeSelectedShape()}>Remove Selected</button>
+          <button
+            onClick={() => removeSelectedShape()}
+            style={{
+              padding: "12px 20px",
+              background: "rgba(255, 80, 80, 0.1)",
+              border: "1px solid rgba(255, 80, 80, 0.2)",
+              borderRadius: "8px",
+              color: "rgba(255, 120, 120, 0.9)",
+              fontFamily: "Crimson Pro, serif",
+              fontSize: "15px",
+              fontWeight: "500",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = "rgba(255, 80, 80, 0.2)";
+              e.target.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = "rgba(255, 80, 80, 0.1)";
+              e.target.style.transform = "translateY(0)";
+            }}
+          >
+            − Remove Selected
+          </button>
         </div>
       </div>
 

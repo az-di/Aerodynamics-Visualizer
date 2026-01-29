@@ -30,7 +30,7 @@ export default function UISidebar({
             margin: "0 0 6px 0",
             fontSize: "24px",
             fontWeight: "600",
-            fontFamily: "Crimson Pro, serif",
+            fontFamily: "JetBrains Mono, monospace",
             color: "rgba(255, 255, 255, 0.95)",
             letterSpacing: "-0.02em",
           }}
@@ -65,7 +65,7 @@ export default function UISidebar({
               fontSize: "15px",
               fontWeight: "400",
               color: "rgba(255, 255, 255, 0.85)",
-              fontFamily: "Crimson Pro, serif",
+              fontFamily: "JetBrains Mono, monospace",
             }}
           >
             Flow Speed
@@ -121,7 +121,7 @@ export default function UISidebar({
               fontSize: "15px",
               fontWeight: "400",
               color: "rgba(255, 255, 255, 0.85)",
-              fontFamily: "Crimson Pro, serif",
+              fontFamily: "JetBrains Mono, monospace",
             }}
           >
             Particle Count

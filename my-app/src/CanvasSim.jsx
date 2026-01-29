@@ -98,7 +98,7 @@ export default function CanvasSim({ flowSpeed, numParticles }) {
       if (addingRef.current) {
         console.log(selectedShape);
         addShape(x, y);
-        addingRef.current = false;
+        setAdding(false);
         canvasRef.current.style.cursor = "default";
         return;
       }

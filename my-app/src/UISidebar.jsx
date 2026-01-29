@@ -86,7 +86,7 @@ export default function UISidebar({
         <input
           type="range"
           min="0"
-          max="4"
+          max="5"
           step="0.05"
           value={flowSpeed}
           onChange={(e) => setFlowSpeed(parseFloat(e.target.value))}
